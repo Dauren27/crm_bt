@@ -1,0 +1,82 @@
+.registration {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  .registration__form {
+    padding-top: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .registration__title {
+      padding-top: 100px;
+      text-align: center;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 50px;
+      line-height: 59px;
+    }
+    button {
+      width: 395px;
+      margin-top: 60px;
+      @media (max-width: 420px) {
+        width: 100%;
+      }
+    }
+    .registration__row {
+      margin-top: 30px;
+      .title {
+        font-size: 26px;
+        line-height: 28px;
+        font-style: normal;
+        font-weight: 400;
+      }
+      .input {
+        margin-top: 12px;
+        width: 482px;
+        height: 60px;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        padding: 4px 10px;
+        @media (max-width: 555px) {
+          width: 420px;
+        }
+        @media (max-width: 470px) {
+          width: 370px;
+        }
+        @media (max-width: 410px) {
+          width: 300px;
+        }
+        @media (max-width: 340px) {
+          width: 260px;
+        }
+      }
+      .select {
+        width: 287px;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        margin-top: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        span {
+          cursor: pointer;
+        }
+        @media (max-width: 555px) {
+          font-size: 15px;
+        }
+      }
+    }
+    .link {
+      margin-top: 10px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 21px;
+      color: #42b4f4;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

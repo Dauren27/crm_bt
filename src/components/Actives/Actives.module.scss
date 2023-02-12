@@ -1,0 +1,30 @@
+.companies__category {
+  margin-top: 50px;
+  position: relative;
+  .companies__title {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    max-width: 100%;
+    @media (max-width: 555px) {
+      font-size: 20px;
+    }
+  }
+  input {
+    margin-top: 30px;
+  }
+  .companies__input {
+    width: 482px;
+    height: 60px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-top: 30px;
+    padding: 4px 10px;
+    @media (max-width: 555px) {
+      width: 400px;
+    }
+    @media (max-width: 455px) {
+      width: 100%;
+    }
+  }
+}

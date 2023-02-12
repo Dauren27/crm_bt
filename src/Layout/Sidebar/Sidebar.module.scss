@@ -1,0 +1,112 @@
+.sidebar {
+  width: 315px;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  position: relative;
+  svg {
+    width: 30px;
+    height: 30px;
+    display: none;
+  }
+  @media (max-width: 1285px) {
+    max-width: 260px;
+  }
+  @media (max-width: 1150px) {
+    max-width: 220px;
+  }
+  @media (max-width: 1020px) {
+    max-width: 190px;
+  }
+  @media (max-width: 1000px) {
+    max-width: 100%;
+    transition: all 0.8s;
+    transform: translateX(-100%);
+    position: fixed;
+    left: -100%;
+    svg {
+      display: block;
+    }
+    &.sidebar__open {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      transform: translateX(0%);
+      transition: all 0.4s;
+      z-index: 10;
+      @media (max-width: 500px) {
+        width: 100%;
+      }
+    }
+    .sidebar__closeBtn {
+      display: flex !important;
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .sidebar__dashboard {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-right: none;
+    height: 58px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+
+  .sidebar__menu {
+    margin-top: 79px;
+    margin-left: 20px;
+    .sidebar__menu__title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+    .sidebar__menu__links {
+      padding-left: 0;
+      margin-top: 20px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      li {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 30px;
+        cursor: pointer;
+      }
+      a {
+        width: 100%;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+        color: #000;
+        &.active {
+          color: #42b4f4 !important;
+        }
+      }
+      span {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+      }
+    }
+  }
+}

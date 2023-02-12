@@ -1,0 +1,27 @@
+.button {
+  width: 264px;
+  height: 63px;
+  left: 445px;
+  top: 1094px;
+  background: #42b4f4;
+  border-radius: 5px;
+  font-size: 20px;
+  line-height: 23px;
+  color: #ffffff;
+  border: none;
+  margin-top: 50px;
+  @media(max-width: 555px){
+    max-width: 100%;
+  }
+}
+.button:hover {
+  background-color: #68C9FF;
+  transition: all 0.5s ease;
+  color: #ffffff;
+}
+
+@media (max-width: 375px) {
+  .button {
+    width: 95%;
+  }
+}
