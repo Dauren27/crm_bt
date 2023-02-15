@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import axios from "axios";
 import cl from "./Chart.module.scss";
 import {
   Chart as ChartJS,
@@ -11,6 +10,7 @@ import {
   LinearScale,
   PointElement,
 } from "chart.js";
+import { useSelector } from "react-redux";
 ChartJS.register(
   Title,
   Tooltip,
@@ -20,8 +20,11 @@ ChartJS.register(
   PointElement
 );
 
-const Chart = ({ title }) => {
-  const [fetchedData, setFetchedData] = useState();
+const Chart = ({ title, item = "Conversation" }) => {
+  const { chartData } = useSelector((state) => state.user);
+  const [fetchedData, setFetchedData] = useState(
+    chartData && chartData[item] && chartData[item]
+  );
   const options = {
     maintainAspectRatio: false,
     responsive: true,
@@ -37,12 +40,8 @@ const Chart = ({ title }) => {
     ],
   };
   useEffect(() => {
-    try {
-      axios.get("https://baitushum.pp.ua/crm/test/").then((response) => {
-        setFetchedData(response.data.Conversation);
-      });
-    } catch (e) {}
-  }, []);
+    setFetchedData(chartData[item] && chartData[item]);
+  }, [chartData]);
   return (
     <div className={cl.chart__wrapper}>
       <h2>{title}</h2>

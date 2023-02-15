@@ -4,6 +4,7 @@ import {
   userLogin,
   getUserDetail,
   updateToken,
+  getChartData,
 } from "./userActions";
 
 const userToken = sessionStorage.getItem("userToken");
@@ -19,6 +20,7 @@ const initialState = {
   registerError: null,
   registerSuccess: false,
   userDetailError: false,
+  charData: null,
 };
 
 const userSlice = createSlice({
@@ -74,6 +76,9 @@ const userSlice = createSlice({
     },
     [getUserDetail.rejected]: (state, { payload }) => {
       state.userDetailError = true;
+    },
+    [getChartData.fulfilled]: (state, { payload }) => {
+      state.chartData = payload;
     },
   },
 });

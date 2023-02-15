@@ -5,7 +5,7 @@ import "antd/dist/antd.min.css";
 
 import { PrivateRoutes, PublicRoutes } from "./routes/routes";
 import { GlobalContext } from "./context";
-import { getUserDetail, updateToken } from "./redux/reducers";
+import { getChartData, getUserDetail, updateToken } from "./redux/reducers";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserDetail());
+    dispatch(getChartData());
   }, [isAuth]);
 
   return (

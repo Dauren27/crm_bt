@@ -41,6 +41,7 @@ const ConversationsList = () => {
   );
   const [searchValue, setSearchValue] = useState("");
   const [chartToggle, setChartToggle] = useState(false);
+  
   const handleChange = (e) => {
     const { name, checked } = e.target;
     if (name === "allSelect") {
@@ -167,7 +168,7 @@ const ConversationsList = () => {
               <TfiBarChart />
             </div>
           </div>
-          {chartToggle && <Chart title="Переговоры" />}
+          {chartToggle && <Chart title="Переговоры" item="Conversation" />}
           {deleteSuccess && <Success>Документ был успешно удален</Success>}
           {deleteLoading && <Loading>Удаление...</Loading>}
           {deleteError && <Error>Произошла ошибка при удалении...</Error>}

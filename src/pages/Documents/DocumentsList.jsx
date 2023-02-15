@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { TfiBarChart } from "react-icons/tfi";
 
 import cl from "./documentsList.module.scss";
 import {
@@ -11,6 +12,7 @@ import {
 } from "../../redux/reducers";
 import Layout from "../../Layout/Layout";
 import { Loading, Success, Table, Error } from "../../components/UI";
+import Chart from "../../components/UI/Chart/Chart";
 
 const DocumentsList = () => {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ const DocumentsList = () => {
   const [documents, setDocuments] = useState(
     documentsList && documentsList.results
   );
+  const [chartToggle, setChartToggle] = useState(false);
 
   const deleteDoc = () => {
     documents.map((doc) => {
@@ -61,7 +64,7 @@ const DocumentsList = () => {
   useEffect(() => {
     documentsList && setDocuments(documentsList.results);
   }, [documentsList]);
-  
+
   useEffect(() => {
     dispatch(getDocuments());
   }, [dispatch]);
@@ -88,7 +91,15 @@ const DocumentsList = () => {
             <button className={cl.content__delete} onClick={deleteDoc}>
               Удалить
             </button>
+            <div
+              className={cl.chart__toggle}
+              onClick={() => setChartToggle(!chartToggle)}
+            >
+              {chartToggle ? <a>Скрыть График</a> : <a>Показать график</a>}
+              <TfiBarChart />
+            </div>
           </div>
+          {chartToggle && <Chart title="Документы" item="datakk" />}
           {deleteSuccess && <Success>Документ был успешно удален</Success>}
           {deleteLoading && <Loading>Удаление...</Loading>}
           {successMessage && (

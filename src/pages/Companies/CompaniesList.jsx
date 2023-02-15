@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { BiSearch } from "react-icons/bi";
+import { TfiBarChart } from "react-icons/tfi";
 
 import cl from "../Documents/documentsList.module.scss";
 import Layout from "../../Layout/Layout";
 import { deleteCompany, getCompanies, getCompany } from "../../redux/reducers";
-import { Loading, Success, Table, Error } from "../../components/UI";
+import { Loading, Success, Table } from "../../components/UI";
+import Chart from "../../components/UI/Chart/Chart";
 
 const CompaniesList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const {
     companies,
     deleteSuccess,
@@ -24,6 +26,7 @@ const CompaniesList = () => {
   } = useSelector((state) => state.company);
   const [companiesList, setCompaniesList] = useState(companies && companies);
   const [searchValue, setSearchValue] = useState("");
+  const [chartToggle, setChartToggle] = useState(false);
 
   const handleChange = (e) => {
     const { name, checked } = e.target;
@@ -61,6 +64,7 @@ const CompaniesList = () => {
   useEffect(() => {
     dispatch(getCompanies());
   }, [dispatch]);
+
   return (
     <Layout>
       <div className={cl.container}>
@@ -83,7 +87,15 @@ const CompaniesList = () => {
             <button className={cl.content__delete} onClick={deleteDoc}>
               Удалить
             </button>
+            <div
+              className={cl.chart__toggle}
+              onClick={() => setChartToggle(!chartToggle)}
+            >
+              {chartToggle ? <a>Скрыть График</a> : <a>Показать график</a>}
+              <TfiBarChart />
+            </div>
           </div>
+          {chartToggle && <Chart title="Компании" item="Company" />}
           {deleteSuccess && (
             <Success>
               Документ {deletedCompany && deletedCompany.id} был успешно удален

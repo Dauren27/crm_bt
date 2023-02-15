@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { BiSearch } from "react-icons/bi";
+import { TfiBarChart } from "react-icons/tfi";
 
 import cl from "../../pages/Documents/documentsList.module.scss";
 import { deleteEntity, getEntities, getEntity } from "../../redux/reducers";
 import { Loading, Success, Table } from "../UI";
+import Chart from "../../components/UI/Chart/Chart";
 
 const EntitiesList = () => {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const EntitiesList = () => {
   } = useSelector((state) => state.entity);
   const [entitiesList, setEntitiesList] = useState(entities && entities);
   const [searchValue, setSearchValue] = useState("");
+  const [chartToggle, setChartToggle] = useState(false);
 
   const handleChange = (e) => {
     const { name, checked } = e.target;
@@ -59,7 +62,7 @@ const EntitiesList = () => {
   useEffect(() => {
     dispatch(getEntities());
   }, [dispatch]);
-  
+
   return (
     <div className={cl.container}>
       <div className={cl.container__header}>
@@ -83,7 +86,15 @@ const EntitiesList = () => {
           <button className={cl.content__delete} onClick={deleteDoc}>
             Удалить
           </button>
+          <div
+            className={cl.chart__toggle}
+            onClick={() => setChartToggle(!chartToggle)}
+          >
+            {chartToggle ? <a>Скрыть График</a> : <a>Показать график</a>}
+            <TfiBarChart />
+          </div>
         </div>
+        {chartToggle && <Chart title="Юридические лица" item="Entity" />}
         {deleteSuccess && <Success>Документ был успешно удален</Success>}
         {deleteLoading && <Loading>Удаление...</Loading>}
         {successMessage && (

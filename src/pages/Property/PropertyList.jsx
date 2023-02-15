@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { BiSearch } from "react-icons/bi";
+import { TfiBarChart } from "react-icons/tfi";
 
 import cl from "../Documents/documentsList.module.scss";
 import Layout from "../../Layout/Layout";
@@ -11,6 +12,7 @@ import {
   getProperty,
 } from "../../redux/reducers";
 import { Loading, Success, Table, Error } from "../../components/UI";
+import Chart from "../../components/UI/Chart/Chart";
 
 const PropertyList = () => {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const PropertyList = () => {
     properties && properties
   );
   const [searchValue, setSearchValue] = useState("");
+  const [chartToggle, setChartToggle] = useState(false);
 
   const handleChange = (e) => {
     const { name, checked } = e.target;
@@ -57,14 +60,13 @@ const PropertyList = () => {
     dispatch(getProperty({ id: id })).then(() => navigate(`/properties/${id}`));
   };
 
-
   useEffect(() => {
     setPropertiesList(properties);
   }, [properties]);
   useEffect(() => {
     dispatch(getProperties());
   }, [dispatch]);
-  
+
   return (
     <Layout>
       <div className={cl.container}>
@@ -87,7 +89,15 @@ const PropertyList = () => {
             <button className={cl.content__delete} onClick={deleteDoc}>
               Удалить
             </button>
+            <div
+              className={cl.chart__toggle}
+              onClick={() => setChartToggle(!chartToggle)}
+            >
+              {chartToggle ? <a>Скрыть График</a> : <a>Показать график</a>}
+              <TfiBarChart />
+            </div>
           </div>
+          {chartToggle && <Chart title="Залоговые имущества" item="Property" />}
           {deleteSuccess && <Success>Документ был успешно удален</Success>}
           {deleteLoading && <Loading>Удаление...</Loading>}
           {successMessage && (

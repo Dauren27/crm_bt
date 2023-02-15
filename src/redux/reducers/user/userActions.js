@@ -146,3 +146,14 @@ export const getUserDetail = createAsyncThunk(
     }
   }
 );
+export const getChartData = createAsyncThunk(
+  "getChartData",
+  async (arg, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/crm/dashboard/`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

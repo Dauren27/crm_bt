@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { BiSearch } from "react-icons/bi";
+import { TfiBarChart } from "react-icons/tfi";
 
 import cl from "../Documents/documentsList.module.scss";
 import Layout from "../../Layout/Layout";
@@ -11,6 +12,7 @@ import {
   getGuarantor,
   getGuarantors,
 } from "../../redux/reducers";
+import Chart from "../../components/UI/Chart/Chart";
 
 const RecipientsList = () => {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const RecipientsList = () => {
     guarantors && guarantors
   );
   const [searchValue, setSearchValue] = useState("");
+  const [chartToggle, setChartToggle] = useState(false);
 
   const handleChange = (e) => {
     const { name, checked } = e.target;
@@ -62,7 +65,7 @@ const RecipientsList = () => {
   useEffect(() => {
     dispatch(getGuarantors());
   }, [dispatch]);
-  
+
   useEffect(() => {
     setGuarantorsList(guarantors);
   }, [guarantors]);
@@ -89,7 +92,15 @@ const RecipientsList = () => {
             <button className={cl.content__delete} onClick={deleteDoc}>
               Удалить
             </button>
+            <div
+              className={cl.chart__toggle}
+              onClick={() => setChartToggle(!chartToggle)}
+            >
+              {chartToggle ? <a>Скрыть График</a> : <a>Показать график</a>}
+              <TfiBarChart />
+            </div>
           </div>
+          {chartToggle && <Chart title="Поручители" item="Guarantor" />}
           {deleteSuccess && <Success>Документ был успешно удален</Success>}
           {deleteLoading && <Loading>Удаление...</Loading>}
           {successMessage && (
